@@ -1,7 +1,1 @@
-(() => {
-  "use strict";
-  document.getElementById("timer-hours"),
-    document.getElementById("timer-minutes"),
-    document.getElementById("timer-seconds"),
-    console.log("two.js");
-})();
+(()=>{"use strict";(e=>{const t=document.getElementById("timer-hours"),n=document.getElementById("timer-minutes"),r=document.getElementById("timer-seconds");(()=>{let e=setInterval((()=>{let o=(()=>{let e=new Date("26 february 2022").getTime(),t=(new Date).getTime();if(t>e)return{timeRemaining:-1,hours:"00",minutes:"00",seconds:"00"};let n=(e-t)/1e3;return Math.floor(n/120/24),{timeRemaining:n,hours:Math.floor(n/120%24),minutes:Math.floor(n/60%60),seconds:Math.floor(n%60)}})();t.textContent=(o.hours+"").padStart(2,"0"),n.textContent=(o.minutes+"").padStart(2,"0"),r.textContent=(o.seconds+"").padStart(2,"0"),o.timeRemaining<0&&clearInterval(e)}),1e3)})()})()})();
