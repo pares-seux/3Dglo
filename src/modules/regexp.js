@@ -39,7 +39,7 @@ const regexp = () => {
 
   telInputs.forEach((item) => {
     item.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/^\d-()]+/g, "");
+      e.target.value = e.target.value.replace(/[^\d-()]+/g, "");
     });
     item.addEventListener("blur", () => {
       item.value = item.value.replace(/[()-]/g, "");
