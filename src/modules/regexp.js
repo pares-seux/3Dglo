@@ -15,9 +15,9 @@ const regexp = () => {
         item.parentElement.append(errorSpan);
       } else {
         errorSpan.remove();
-        item.value = item.value.replace(/^-+|-+$|^\s+|\s+$/g, '').replace(/\s\s/g, ' ').replace(/--/g, '-');
+        item.value = item.value.replace(/(^[^а-яА-Я]+)|([^а-яА-Я]+)$/g, '').replace(/\s\s/g, ' ').replace(/--/g, '-');
       }
-    });
+    });ц
   });
 
 
