@@ -10,4 +10,4 @@ menu();
 modal();
 regexp();
 tabs();
-slider();
+slider("portfolio-content", "portfolio-item");
