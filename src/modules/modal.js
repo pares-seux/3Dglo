@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const modal = () => {
   const modal = document.querySelector(".popup");
   const modalForm = modal.querySelector(".popup-content");
@@ -5,14 +7,16 @@ const modal = () => {
   let appearanceFrame, animateCount;
 
   const modalAppearance = () => {
-    appearanceFrame = requestAnimationFrame(modalAppearance);
-    if (animateCount < 100) {
-      animateCount += 2;
-      modalForm.style.opacity = `${animateCount}%`;
-    } else {
-      cancelAnimationFrame(appearanceFrame);
-      modalForm.style.opacity = "";
-    }
+    animate({
+      duration: 1000,
+      timing(timeFraction) {
+        return timeFraction;
+      },
+      draw(progress) {
+        modalForm.style.opacity = progress * 100 + "%";
+      },
+    });
+    modalForm.style.opacity = "";
   };
 
   buttons.forEach((btn) => {
