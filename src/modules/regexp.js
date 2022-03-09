@@ -1,9 +1,4 @@
 const regexp = () => {
-  const textInputs = document.querySelectorAll("form input[type=text]");
-  const areaInput = document.querySelector(".mess");
-  const emailInputs = document.querySelectorAll("form input[type=email]");
-  const telInputs = document.querySelectorAll("form input[type=tel]");
-
   document.addEventListener("input", (e) => {
     if (e.target.classList.contains("calc-item")) {
       e.target.value = e.target.value.replace(/[\D]+/, "");
@@ -25,25 +20,40 @@ const regexp = () => {
     }
   });
 
-  // textInputs.forEach((item) => {
-  //   item.addEventListener("blur", () => {
-  //     item.value = item.value
-  //       .replace(/(^[^а-яА-Я]+)|([^а-яА-Я]+)$/g, "")
-  //       .replace(/([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g, "");
-  //   });
-  // });
+  document.addEventListener(
+    "blur",
+    (e) => {
+      if (
+        e.target.localName === "input" &&
+        !e.target.classList.contains("calc-item")
+      ) {
+        switch (e.target.type) {
+          case "text":
+            e.target.value = e.target.value
+              .replace(/(^[^а-яА-ЯёЁ]+)|([^а-яА-ЯёЁ]+)$/g, "")
+              .replace(/([-()@_.!~*'/s])(?=[-()@_.!~*'/s]*\1)/g, "")
+              .replace(/(^|\s)\S/g, (letter) => {
+                return letter.toUpperCase();
+              });
 
-  // areaInput.addEventListener("blur", () => {
-  //   item.value = item.value
-  //     .replace(/(^[^а-яА-Я]+)|([^а-яА-Я]+)$/g, "")
-  //     .replace(/([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g, "");
-  // });
-
-  // emailInputs.forEach((item) => {
-  //   item.addEventListener("blur", () => {
-  //     item.value = item.value.replace(/([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g, "");
-  //   });
-  // });
+            break;
+          case "email":
+            e.target.value = e.target.value.replace(
+              /([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g,
+              ""
+            );
+            break;
+          case "tel":
+            e.target.value = e.target.value.replace(
+              /([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g,
+              ""
+            );
+            break;
+        }
+      }
+    },
+    true
+  );
 
   // telInputs.forEach((item) => {
   //   item.addEventListener("blur", () => {
