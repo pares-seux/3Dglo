@@ -5,6 +5,7 @@ import regexp from "./modules/regexp";
 import tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
+import sendForm from "./modules/sendForm";
 
 timer("25 february 2022");
 menu();
@@ -13,3 +14,4 @@ regexp();
 tabs();
 slider("portfolio-content", "portfolio-item");
 calc();
+sendForm("form1");
