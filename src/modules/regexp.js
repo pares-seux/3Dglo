@@ -31,7 +31,8 @@ const regexp = () => {
           case "text":
             e.target.value = e.target.value
               .replace(/(^[^а-яА-ЯёЁ]+)|([^а-яА-ЯёЁ]+)$/g, "")
-              .replace(/([-()@_.!~*'/s])(?=[-()@_.!~*'/s]*\1)/g, "")
+              .replace(/([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g, "")
+              .replace(/\s+/g,' ' )
               .replace(/(^|\s)\S/g, (letter) => {
                 return letter.toUpperCase();
               });
