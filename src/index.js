@@ -14,4 +14,12 @@ regexp();
 tabs();
 slider("portfolio-content", "portfolio-item");
 calc();
-sendForm("form1");
+sendForm({
+  formId: "form1",
+  someElement: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
