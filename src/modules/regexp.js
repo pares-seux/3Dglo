@@ -1,3 +1,5 @@
+import { validate } from "./validate";
+
 const regexp = () => {
   document.addEventListener("input", (e) => {
     if (e.target.classList.contains("calc-item")) {
@@ -6,18 +8,13 @@ const regexp = () => {
       switch (e.target.type) {
         case "text":
           e.target.value = e.target.value.replace(/[^а-яА-ЯёЁ\s-]+/g, "");
-          if (e.target.name === "user_name") {
+          if (
+            e.target.name === "user_name" &&
+            (e.target.classList.contains("error") ||
+              e.target.classList.contains("success"))
+          ) {
             let element = document.getElementById(e.target.id);
-            if (
-              element.value.trim().length < 3 ||
-              /^([^\s]*\s){3,}[^\s]*$/.test(element.value.trim())
-            ) {
-              element.classList.add("error");
-              element.classList.remove("success");
-            } else {
-              element.classList.add("success");
-              element.classList.remove("error");
-            }
+            validate(element);
           }
           break;
         case "email":
@@ -25,9 +22,23 @@ const regexp = () => {
             /[^a-zA-z0-9@-_\.!~\*\']+/g,
             ""
           );
+          if (
+            e.target.classList.contains("error") ||
+            e.target.classList.contains("success")
+          ) {
+            let element = document.getElementById(e.target.id);
+            validate(element);
+          }
           break;
         case "tel":
           e.target.value = e.target.value.replace(/[^\d-()+]+/g, "");
+          if (
+            e.target.classList.contains("error") ||
+            e.target.classList.contains("success")
+          ) {
+            let element = document.getElementById(e.target.id);
+            validate(element);
+          }
           break;
       }
     }
@@ -49,7 +60,6 @@ const regexp = () => {
               .replace(/(^|\s)\S/g, (letter) => {
                 return letter.toUpperCase();
               });
-            document.getElementById(e.target.id).classList.remove("success");
             break;
           case "email":
             e.target.value = e.target.value.replace(
@@ -69,27 +79,19 @@ const regexp = () => {
     true
   );
 
-  // telInputs.forEach((item) => {
-  //   item.addEventListener("blur", () => {
-  //     item.value = item.value.replace(/[()-+]/g, "");
-  //     if (item.value.length === 10) {
-  //       item.value = `(${item.value.slice(0, 3)})${item.value.slice(
-  //         3,
-  //         6
-  //       )}-${item.value.slice(6, 8)}-${item.value.slice(8, 10)}`;
-  //     } else if (
-  //       item.value.length === 11 &&
-  //       (item.value[0] === "7" || item.value[0] === "8")
-  //     ) {
-  //       {
-  //         item.value = `+7(${item.value.slice(1, 4)})${item.value.slice(
-  //           4,
-  //           7
-  //         )}-${item.value.slice(7, 9)}-${item.value.slice(9, 11)}`;
-  //       }
-  //     }
-  //   });
-  // });
+  document.addEventListener(
+    "invalid",
+    (e) => {
+      e.preventDefault();
+      if (
+        e.target.localName === "input" &&
+        !e.target.classList.contains("calc-item")
+      ) {
+        e.target.classList.add("error");
+      }
+    },
+    true
+  );
 };
 
 export default regexp;

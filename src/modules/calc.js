@@ -18,7 +18,6 @@ const calc = (price = 100) => {
       if (counter < totalValue || counter > totalValue) {
         counter += step;
         total.textContent = counter;
-        console.log(counter, step, total.textContent);
       } else {
         cancelAnimationFrame(animateFrame);
       }

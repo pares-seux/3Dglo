@@ -1,9 +1,11 @@
+import { validate } from "./validate";
+
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
-  const statusBlock = document.createElement("div");
-  const loadText = "Загрузка...";
-  const errorText = "Ошибка...";
-  const successText = "Спасибо! Наш менеджер с Вами свяжется!";
+  // const statusBlock = document.createElement("div");
+  // const loadText = "Загрузка...";
+  // const errorText = "Ошибка...";
+  // const successText = "Спасибо! Наш менеджер с Вами свяжется!";
 
   // const checkValue = (value) => {
   //   switch (value.name) {
@@ -19,10 +21,10 @@ const sendForm = ({ formId, someElem = [] }) => {
   //   }
   // };
 
-  const validate = (list) => {
+  const validateInputs = (list) => {
     let success = true;
     list.forEach((input) => {
-      //    checkValue(input);
+      validate(input);
       if (input.classList.contains("error")) {
         success = false;
       }
@@ -43,7 +45,7 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formData = new FormData(form);
     const formBody = {};
 
-    statusBlock.textContent = loadText;
+    // statusBlock.textContent = loadText;
     form.append(statusBlock);
 
     formData.forEach((val, key) => {
@@ -57,18 +59,19 @@ const sendForm = ({ formId, someElem = [] }) => {
         formBody[elem.id] = element.value;
       }
     });
-    if (validate(formElements)) {
+    if (validateInputs(formElements)) {
       sendData(formBody)
         .then((data) => {
           console.log(data);
-          statusBlock.textContent = successText;
+          //     statusBlock.textContent = successText;
           formElements.forEach((input) => {
             input.value = "";
+            input.classList.remove("success");
           });
         })
         .catch((error) => {
           console.log(error);
-          statusBlock.textContent = errorText;
+          //statusBlock.textContent = errorText;
         });
     }
   };
