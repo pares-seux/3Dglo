@@ -1,5 +1,3 @@
-import { animate } from "./helpers";
-
 const calc = (price = 100) => {
   const calcBlock = document.querySelector(".calc-block");
   const calcType = document.querySelector(".calc-type");
@@ -7,18 +5,24 @@ const calc = (price = 100) => {
   const calcCount = document.querySelector(".calc-count");
   const calcDay = document.querySelector(".calc-day");
   const total = document.getElementById("total");
+  let totalAnimate,
+    counter = 0,
+    animateFrame;
 
-  const animateResult = (value) => {
-    animate({
-      duration: 1000,
-      timing(timeFraction) {
-        return timeFraction;
-      },
-      draw(progress) {
-        console.log(progress, value / progress);
-        total.textContent = Math.round(value / progress);
-      },
-    });
+  const animate = (totalValue) => {
+    const step = (totalValue - +total.textContent) / 100;
+
+    return function () {
+      animateFrame = requestAnimationFrame(totalAnimate);
+
+      if (counter < totalValue || counter > totalValue) {
+        counter += step;
+        total.textContent = counter;
+        console.log(counter, step, total.textContent);
+      } else {
+        cancelAnimationFrame(animateFrame);
+      }
+    };
   };
 
   const countCalc = () => {
@@ -45,21 +49,25 @@ const calc = (price = 100) => {
     } else {
       totalValue = 0;
     }
-    console.log(totalValue);
-    animateResult(totalValue);
-    //total.textContent = totalValue;
+
+    totalAnimate = animate(totalValue);
+    totalAnimate();
   };
 
-  calcBlock.addEventListener("input", (e) => {
-    if (
-      e.target === calcType ||
-      e.target === calcSquare ||
-      e.target === calcCount ||
-      e.target === calcDay
-    ) {
-      countCalc();
-    }
-  });
+  calcBlock.addEventListener(
+    "blur",
+    (e) => {
+      if (
+        e.target === calcType ||
+        e.target === calcSquare ||
+        e.target === calcCount ||
+        e.target === calcDay
+      ) {
+        countCalc();
+      }
+    },
+    true
+  );
 };
 
 export default calc;
