@@ -15,8 +15,8 @@ const menu = () => {
   };
 
   document.addEventListener("click", (e) => {
-    e.preventDefault();
     if (e.target.closest(".active-menu")) {
+      e.preventDefault();
       if (e.target === closeBtn) {
         handleMenu();
       } else if (e.target.localName === "a") {
@@ -29,9 +29,11 @@ const menu = () => {
         e.target === menuBtn ||
         e.target.closest(".menu")
       ) {
+        e.preventDefault();
         handleMenu();
       }
       if (e.target === scrollBtn || scrollBtn === e.target.parentElement) {
+        e.preventDefault();
         scroll(scrollBtn);
       }
     }

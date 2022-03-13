@@ -7,7 +7,7 @@ import slider from "./modules/slider";
 import calc from "./modules/calc";
 import sendForm from "./modules/sendForm";
 
-timer("25 february 2022");
+timer("17 march 2022");
 menu();
 modal();
 regexp();
@@ -16,6 +16,24 @@ slider("portfolio-content", "portfolio-item");
 calc();
 sendForm({
   formId: "form1",
+  someElement: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
+sendForm({
+  formId: "form2",
+  someElement: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
+sendForm({
+  formId: "form3",
   someElement: [
     {
       type: "block",
