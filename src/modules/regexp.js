@@ -7,11 +7,17 @@ const regexp = () => {
     } else {
       switch (e.target.type) {
         case "text":
-          e.target.value = e.target.value.replace(/[^а-яА-ЯёЁ\s-]+/g, "");
+          if (e.target.name === "user_name") {
+            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁ\-\s]+/g, "");
+          } else {
+            e.target.value = e.target.value.replace(
+              /[^а-яА-ЯёЁ\-()@_.,!?~*'\s]+/g,
+              ""
+            );
+          }
           if (
-            e.target.name === "user_name" &&
-            (e.target.classList.contains("error") ||
-              e.target.classList.contains("success"))
+            e.target.classList.contains("error") ||
+            e.target.classList.contains("success")
           ) {
             let element = document.getElementById(e.target.id);
             validate(element);
@@ -31,7 +37,7 @@ const regexp = () => {
           }
           break;
         case "tel":
-          e.target.value = e.target.value.replace(/[^\d-()+]+/g, "");
+          e.target.value = e.target.value.replace(/[^\d\-()+]+/g, "");
           if (
             e.target.classList.contains("error") ||
             e.target.classList.contains("success")
@@ -54,8 +60,8 @@ const regexp = () => {
         switch (e.target.type) {
           case "text":
             e.target.value = e.target.value
-              .replace(/(^[^а-яА-ЯёЁ]+)|([^а-яА-ЯёЁ]+)$/g, "")
-              .replace(/([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g, "")
+              .replace(/(^[^а-яА-ЯёЁ]+)|([^а-яА-ЯёЁ.!?]+)$/g, "")
+              .replace(/([-()@_.,!?~*'])(?=[-()@_.,!?~*']*\1)/g, "")
               .replace(/\s+/g, " ")
               .replace(/(^|\s)\S/g, (letter) => {
                 return letter.toUpperCase();
@@ -63,13 +69,13 @@ const regexp = () => {
             break;
           case "email":
             e.target.value = e.target.value.replace(
-              /([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g,
+              /([-()@_.,?!~*'])(?=[-()@_.,?!~*']*\1)/g,
               ""
             );
             break;
           case "tel":
             e.target.value = e.target.value.replace(
-              /([-()@_.!~*'])(?=[-()@_.!~*']*\1)/g,
+              /([-()@_.,?!~*'])(?=[-()@_.,?!~*']*\1)/g,
               ""
             );
             break;

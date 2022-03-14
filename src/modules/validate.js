@@ -2,18 +2,22 @@ const validate = (element) => {
   const checkValue = () => {
     switch (element.type) {
       case "text":
-        if (
-          element.value.trim().length < 3 ||
-          /^([^\s]*\s){3,}[^\s]*$/.test(
-            element.value.trim().replace(/\s+/g, " ")
-          )
-        ) {
-          element.classList.add("error");
-          element.classList.remove("success");
-          return false;
+        if (element.name === "user_name") {
+          if (
+            element.value.trim().length < 3 ||
+            /^([^\s]*\s){3,}[^\s]*$/.test(
+              element.value.trim().replace(/\s+/g, " ")
+            )
+          ) {
+            element.classList.add("error");
+            element.classList.remove("success");
+            return false;
+          } else {
+            element.classList.remove("error");
+            element.classList.add("success");
+            return true;
+          }
         } else {
-          element.classList.remove("error");
-          element.classList.add("success");
           return true;
         }
         break;
@@ -32,7 +36,7 @@ const validate = (element) => {
         break;
       case "tel":
         if (
-          /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(
+          /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(
             element.value.trim()
           )
         ) {

@@ -2,6 +2,9 @@ import { validate } from "./validate";
 
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
+  const statusBlock = document.createElement("div");
+  const errorText = "Ошибка...";
+  const successText = "Спасибо! Наш менеджер с Вами свяжется!";
 
   const validateInputs = (list) => {
     let success = true;
@@ -39,8 +42,10 @@ const sendForm = ({ formId, someElem = [] }) => {
       }
     });
     if (validateInputs(formElements)) {
+      form.append(statusBlock);
       sendData(formBody)
         .then((data) => {
+          statusBlock.textContent = successText;
           formElements.forEach((input) => {
             input.value = "";
             input.classList.remove("success");
@@ -48,6 +53,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         })
         .catch((error) => {
           console.log(error);
+          statusBlock.textContent = errorText;
         });
     }
   };

@@ -16,7 +16,7 @@ slider("portfolio-content", "portfolio-item");
 calc();
 sendForm({
   formId: "form1",
-  someElement: [
+  someElem: [
     {
       type: "block",
       id: "total",
@@ -25,7 +25,7 @@ sendForm({
 });
 sendForm({
   formId: "form2",
-  someElement: [
+  someElem: [
     {
       type: "block",
       id: "total",
@@ -34,7 +34,7 @@ sendForm({
 });
 sendForm({
   formId: "form3",
-  someElement: [
+  someElem: [
     {
       type: "block",
       id: "total",
