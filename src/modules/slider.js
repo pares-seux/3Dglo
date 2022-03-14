@@ -35,7 +35,6 @@ const slider = (sliderBlockClass, slideClass) => {
 
   const loadSlider = () => {
     sliderBlock = document.querySelector("." + sliderBlockClass);
-    console.log(sliderBlock, slideClass);
     if (sliderBlock === null) {
       console.log("error");
       return;

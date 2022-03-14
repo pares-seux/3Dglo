@@ -4,7 +4,7 @@ const modal = () => {
   const modal = document.querySelector(".popup");
   const modalForm = modal.querySelector(".popup-content");
   const buttons = document.querySelectorAll(".popup-btn");
-  let appearanceFrame, animateCount;
+  let animateCount;
 
   const modalAppearance = () => {
     animate({

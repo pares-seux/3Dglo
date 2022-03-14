@@ -2,24 +2,6 @@ import { validate } from "./validate";
 
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
-  // const statusBlock = document.createElement("div");
-  // const loadText = "Загрузка...";
-  // const errorText = "Ошибка...";
-  // const successText = "Спасибо! Наш менеджер с Вами свяжется!";
-
-  // const checkValue = (value) => {
-  //   switch (value.name) {
-  //     case "user_name":
-  //       if (value.value.match(/^([а-яА-ЯёЁ]+){1-3}$/)) {
-  //         value.classList.add("success");
-  //       }
-  //       break;
-  //     case "user_email":
-  //       break;
-  //     case "user_phone":
-  //       break;
-  //   }
-  // };
 
   const validateInputs = (list) => {
     let success = true;
@@ -45,9 +27,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formData = new FormData(form);
     const formBody = {};
 
-    // statusBlock.textContent = loadText;
-    form.append(statusBlock);
-
     formData.forEach((val, key) => {
       formBody[key] = val;
     });
@@ -62,8 +41,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     if (validateInputs(formElements)) {
       sendData(formBody)
         .then((data) => {
-          console.log(data);
-          //     statusBlock.textContent = successText;
           formElements.forEach((input) => {
             input.value = "";
             input.classList.remove("success");
@@ -71,7 +48,6 @@ const sendForm = ({ formId, someElem = [] }) => {
         })
         .catch((error) => {
           console.log(error);
-          //statusBlock.textContent = errorText;
         });
     }
   };
