@@ -18,7 +18,11 @@ const validate = (element) => {
             return true;
           }
         } else {
-          return true;
+          if (element.value.trim() !== "") {
+            return true;
+          } else {
+            return false;
+          }
         }
         break;
       case "email":

@@ -62,10 +62,12 @@ const regexp = () => {
             e.target.value = e.target.value
               .replace(/(^[^а-яА-ЯёЁ]+)|([^а-яА-ЯёЁ.!?]+)$/g, "")
               .replace(/([-()@_.,!?~*'])(?=[-()@_.,!?~*']*\1)/g, "")
-              .replace(/\s+/g, " ")
-              .replace(/(^|\s)\S/g, (letter) => {
+              .replace(/\s+/g, " ");
+            if (e.target.name === "user_name") {
+              e.target.value = e.target.value.replace(/(^|\s)\S/g, (letter) => {
                 return letter.toUpperCase();
               });
+            }
             break;
           case "email":
             e.target.value = e.target.value.replace(

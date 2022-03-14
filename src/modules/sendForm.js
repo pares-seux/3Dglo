@@ -31,21 +31,31 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formBody = {};
 
     formData.forEach((val, key) => {
-      formBody[key] = val;
+      if (key !== "user_message") {
+        formBody[key] = val;
+      } else if (val !== "") {
+        formBody[key] = val;
+      }
     });
     someElem.forEach((elem) => {
       const element = document.getElementById(elem.id);
-      if (elem.type === "block") {
+      if (elem.type === "block" && element.textContent !== "0") {
         formBody[elem.id] = element.textContent;
-      } else if (elem.type === "input") {
+      } else if (elem.type === "input" && element.textContent !== "0") {
         formBody[elem.id] = element.value;
       }
     });
     if (validateInputs(formElements)) {
       form.append(statusBlock);
+      if (formId === "form3") {
+        statusBlock.style.color = "white";
+      }
       sendData(formBody)
         .then((data) => {
           statusBlock.textContent = successText;
+          setTimeout(() => {
+            statusBlock.textContent = "";
+          }, 5000);
           formElements.forEach((input) => {
             input.value = "";
             input.classList.remove("success");
@@ -54,6 +64,9 @@ const sendForm = ({ formId, someElem = [] }) => {
         .catch((error) => {
           console.log(error);
           statusBlock.textContent = errorText;
+          setTimeout(() => {
+            statusBlock.textContent = "";
+          }, 5000);
         });
     }
   };
