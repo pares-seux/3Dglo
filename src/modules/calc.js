@@ -27,7 +27,6 @@ const calc = (price = 100) => {
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
     const calcSquareValue = +calcSquare.value;
-
     let totalValue = 0;
     let calcCountValue = 1;
     let calcDayValue = 1;
@@ -53,20 +52,16 @@ const calc = (price = 100) => {
     totalAnimate();
   };
 
-  calcBlock.addEventListener(
-    "blur",
-    (e) => {
-      if (
-        e.target === calcType ||
-        e.target === calcSquare ||
-        e.target === calcCount ||
-        e.target === calcDay
-      ) {
-        countCalc();
-      }
-    },
-    true
-  );
+  calcBlock.addEventListener("blur", (e) => {
+    if (
+      e.target === calcType ||
+      e.target === calcSquare ||
+      e.target === calcCount ||
+      e.target === calcDay
+    ) {
+      countCalc();
+    }
+  });
 };
 
 export default calc;

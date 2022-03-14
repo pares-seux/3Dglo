@@ -22,7 +22,6 @@ const modal = () => {
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       modal.style.display = "block";
-      console.log(screen.width);
       if (+screen.width > 768) {
         animateCount = 0;
         modalForm.style.opacity = 0;
