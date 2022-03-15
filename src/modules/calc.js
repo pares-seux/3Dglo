@@ -10,7 +10,7 @@ const calc = (price = 100) => {
     animateFrame;
 
   const animate = (totalValue) => {
-    const step = Math.round((totalValue - +total.textContent) / 25);
+    const step = Math.trunc((totalValue - +total.textContent) / 25);
 
     return function () {
       animateFrame = requestAnimationFrame(totalAnimate);
