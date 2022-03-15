@@ -60,7 +60,6 @@ const sendForm = ({ formId, someElem = [] }) => {
             input.value = "";
             input.classList.remove("success");
           });
-          console.log(document.querySelectorAll(".calc-item"));
           document
             .querySelectorAll(".calc-item")
             .forEach((elem) => (elem.value = ""));

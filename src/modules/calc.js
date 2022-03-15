@@ -18,8 +18,7 @@ const calc = (price = 100) => {
         (counter < totalValue && counter + step < totalValue) ||
         (counter > totalValue && counter + step > totalValue)
       ) {
-        counter += step;
-        console.log(totalValue, counter, step);
+        counter += step
         total.textContent = Math.round(counter);
       } else {
         total.textContent = Math.round(totalValue);
