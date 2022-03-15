@@ -10,14 +10,19 @@ const calc = (price = 100) => {
     animateFrame;
 
   const animate = (totalValue) => {
-    const step = (totalValue - +total.textContent) / 10;
+    const step = Math.round((totalValue - +total.textContent) / 25);
 
     return function () {
       animateFrame = requestAnimationFrame(totalAnimate);
-      if (counter < totalValue || counter > totalValue) {
+      if (
+        (counter < totalValue && counter + step < totalValue) ||
+        (counter > totalValue && counter + step < totalValue)
+      ) {
         counter += step;
+        console.log(totalValue, counter, step);
         total.textContent = counter;
       } else {
+        total.textContent = totalValue;
         cancelAnimationFrame(animateFrame);
         calcType.removeAttribute("readonly");
         calcSquare.removeAttribute("readonly");
