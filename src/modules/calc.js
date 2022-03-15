@@ -16,13 +16,14 @@ const calc = (price = 100) => {
       animateFrame = requestAnimationFrame(totalAnimate);
       if (
         (counter < totalValue && counter + step < totalValue) ||
-        (counter > totalValue && counter + step < totalValue)
+        (counter > totalValue && counter + step > totalValue)
       ) {
         counter += step;
         console.log(totalValue, counter, step);
         total.textContent = counter;
       } else {
         total.textContent = totalValue;
+        counter = totalValue;
         cancelAnimationFrame(animateFrame);
         calcType.removeAttribute("readonly");
         calcSquare.removeAttribute("readonly");

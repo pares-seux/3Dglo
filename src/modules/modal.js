@@ -36,6 +36,9 @@ const modal = () => {
       e.target.classList.contains("popup-close")
     ) {
       modal.style.display = "none";
+      modal.querySelectorAll("input").forEach((elem) => {
+        elem.value = "";
+      });
     }
   });
 };

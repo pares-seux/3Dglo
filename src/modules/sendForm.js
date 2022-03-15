@@ -41,7 +41,7 @@ const sendForm = ({ formId, someElem = [] }) => {
       const element = document.getElementById(elem.id);
       if (elem.type === "block" && element.textContent !== "0") {
         formBody[elem.id] = element.textContent;
-      } else if (elem.type === "input" && element.textContent !== "0") {
+      } else if (elem.type === "input" && element.value !== "0") {
         formBody[elem.id] = element.value;
       }
     });
@@ -59,6 +59,18 @@ const sendForm = ({ formId, someElem = [] }) => {
           formElements.forEach((input) => {
             input.value = "";
             input.classList.remove("success");
+          });
+          console.log(document.querySelectorAll(".calc-item"));
+          document
+            .querySelectorAll(".calc-item")
+            .forEach((elem) => (elem.value = ""));
+          someElem.forEach((elem) => {
+            const element = document.getElementById(elem.id);
+            if (elem.type === "block") {
+              element.textContent = 0;
+            } else if (elem.type === "input") {
+              element.value = 0;
+            }
           });
         })
         .catch((error) => {

@@ -7,7 +7,7 @@ const menu = () => {
   const scroll = (element) => {
     let href = element.getAttribute("href");
     let target = document.getElementById(href.slice(1));
-    target.scrollIntoView({ block: "center", behavior: "smooth" });
+    target.scrollIntoView({ block: "start", behavior: "smooth" });
   };
 
   const handleMenu = () => {
