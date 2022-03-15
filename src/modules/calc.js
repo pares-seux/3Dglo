@@ -5,6 +5,27 @@ const calc = (price = 100) => {
   const calcCount = document.querySelector(".calc-count");
   const calcDay = document.querySelector(".calc-day");
   const total = document.getElementById("total");
+  let totalAnimate,
+    counter = 0,
+    animateFrame;
+
+  const animate = (totalValue) => {
+    const step = (totalValue - +total.textContent) / 10;
+
+    return function () {
+      animateFrame = requestAnimationFrame(totalAnimate);
+      if (counter < totalValue || counter > totalValue) {
+        counter += step;
+        total.textContent = counter;
+      } else {
+        cancelAnimationFrame(animateFrame);
+        calcType.removeAttribute("readonly");
+        calcSquare.removeAttribute("readonly");
+        calcCount.removeAttribute("readonly");
+        calcDay.removeAttribute("readonly");
+      }
+    };
+  };
 
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -30,7 +51,8 @@ const calc = (price = 100) => {
       totalValue = 0;
     }
 
-    total.textContent = totalValue;
+    totalAnimate = animate(totalValue);
+    totalAnimate();
   };
 
   calcBlock.addEventListener("input", (e) => {
@@ -40,6 +62,10 @@ const calc = (price = 100) => {
       e.target === calcCount ||
       e.target === calcDay
     ) {
+      calcType.setAttribute("readonly", "readonly");
+      calcSquare.setAttribute("readonly", "readonly");
+      calcCount.setAttribute("readonly", "readonly");
+      calcDay.setAttribute("readonly", "readonly");
       countCalc();
     }
   });
