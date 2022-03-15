@@ -20,9 +20,9 @@ const calc = (price = 100) => {
       ) {
         counter += step;
         console.log(totalValue, counter, step);
-        total.textContent = Math.trunc(counter);
+        total.textContent = Math.round(counter);
       } else {
-        total.textContent = Math.trunc(totalValue);
+        total.textContent = Math.round(totalValue);
         counter = totalValue;
         cancelAnimationFrame(animateFrame);
         calcType.removeAttribute("readonly");
