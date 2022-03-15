@@ -2,7 +2,10 @@ import { validate } from "./validate";
 
 const regexp = () => {
   document.addEventListener("input", (e) => {
-    if (e.target.classList.contains("calc-item")) {
+    if (
+      e.target.classList.contains("calc-item") &&
+      e.target.localName !== "select"
+    ) {
       e.target.value = e.target.value.replace(/[\D]+/, "");
     } else {
       switch (e.target.type) {

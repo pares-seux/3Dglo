@@ -5,24 +5,6 @@ const calc = (price = 100) => {
   const calcCount = document.querySelector(".calc-count");
   const calcDay = document.querySelector(".calc-day");
   const total = document.getElementById("total");
-  let totalAnimate,
-    counter = 0,
-    animateFrame;
-
-  const animate = (totalValue) => {
-    const step = (totalValue - +total.textContent) / 100;
-
-    return function () {
-      animateFrame = requestAnimationFrame(totalAnimate);
-
-      if (counter < totalValue || counter > totalValue) {
-        counter += step;
-        total.textContent = counter;
-      } else {
-        cancelAnimationFrame(animateFrame);
-      }
-    };
-  };
 
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -48,20 +30,23 @@ const calc = (price = 100) => {
       totalValue = 0;
     }
 
-    totalAnimate = animate(totalValue);
-    totalAnimate();
+    total.textContent = totalValue;
   };
 
-  calcBlock.addEventListener("blur", (e) => {
-    if (
-      e.target === calcType ||
-      e.target === calcSquare ||
-      e.target === calcCount ||
-      e.target === calcDay
-    ) {
-      countCalc();
-    }
-  });
+  calcBlock.addEventListener(
+    "input",
+    (e) => {
+      if (
+        e.target === calcType ||
+        e.target === calcSquare ||
+        e.target === calcCount ||
+        e.target === calcDay
+      ) {
+        countCalc();
+      }
+    },
+    true
+  );
 };
 
 export default calc;
